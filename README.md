@@ -4,7 +4,7 @@
 
 Falta aplicar banco de dados para o app salvar os dados quando fecha e melhorar o excluir e editar
 
-<div >
+<div align='center'>
 <h2>Lista de Anotações</h2>
 <img src='assetsRM/1.png' width='400px'/>
 
