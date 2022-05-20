@@ -1,7 +1,7 @@
 class Anota {
-  final String? id;
-  final String title;
-  final String subtitle;
+  late String id;
+  late String title;
+  late String subtitle;
 
   Anota({
     required this.id,

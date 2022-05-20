@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:app_anotacoes/models/anota.dart';
 import 'package:app_anotacoes/pages/anotalist.dart';
 import 'package:app_anotacoes/pages/form.dart';
@@ -15,29 +14,39 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final anota = [
-    Anota(id: '', title: 'Teste', subtitle: 'Tste'),
+    Anota(id: '', title: 'teste', subtitle: 'Teste'),
   ];
 
   _addAnota(String title, String subtitle) {
-    final newAnota = Anota(
-      id: Random().nextDouble().toString(),
-      title: title,
-      subtitle: subtitle,
-    );
-
     setState(() {
+      final newAnota = Anota(
+        id: Random().nextDouble().toString(),
+        title: title,
+        subtitle: subtitle,
+      );
       anota.add(newAnota);
     });
 
     Navigator.of(context).pop();
   }
 
+  _deleteAnota(String id) {
+    setState(() {
+      anota.removeWhere((an) => an.id == id);
+    });
+  }
+
   _openForm(BuildContext context) {
     showModalBottomSheet(
+        isScrollControlled: true,
+        constraints: const BoxConstraints(maxHeight: 550),
         context: context,
         builder: (ctx) {
-          return FormButton(
-            _addAnota,
+          return SingleChildScrollView(
+            padding: MediaQuery.of(context).viewInsets,
+            child: FormButton(
+              _addAnota,
+            ),
           );
         });
   }
@@ -49,14 +58,16 @@ class _HomeState extends State<Home> {
         title: const Text('Anotações'),
         actions: [
           IconButton(
-              onPressed: () => _openForm(context), icon: const Icon(Icons.add))
+            onPressed: () => _openForm(context),
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              AnotaList(anota),
+              AnotaList(anota, _deleteAnota),
             ],
           ),
         ),

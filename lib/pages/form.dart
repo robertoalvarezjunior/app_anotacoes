@@ -16,43 +16,34 @@ class _FormButtonState extends State<FormButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Card(
-        elevation: 5,
-        margin: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: titleControl,
-              decoration: const InputDecoration(
-                  hintText: 'Coloque o Título aqui',
-                  icon: Icon(Icons.send),
-                  border: OutlineInputBorder()),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: subtitleControl,
-              decoration: const InputDecoration(
-                  hintText: 'Coloque o Subtítulo aqui',
-                  icon: Icon(Icons.send),
-                  border: OutlineInputBorder()),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: ElevatedButton(
-                  onPressed: () {
-                    final title = titleControl.text;
-                    final subtitle = subtitleControl.text;
-
-                    widget.onSubmit(title, subtitle);
-                  },
-                  child: const Text('Concluir')),
-            )
-          ],
+    return Column(
+      children: [
+        TextFormField(
+          controller: titleControl,
+          decoration: const InputDecoration(
+              hintText: 'Coloque o Título aqui', border: OutlineInputBorder()),
         ),
-      ),
+        const SizedBox(
+          height: 10,
+        ),
+        TextFormField(
+          controller: subtitleControl,
+          decoration: const InputDecoration(
+              hintText: 'Coloque o Subtítulo aqui',
+              border: OutlineInputBorder()),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: ElevatedButton(
+              onPressed: () {
+                final title = titleControl.text;
+                final subtitle = subtitleControl.text;
+
+                widget.onSubmit(title, subtitle);
+              },
+              child: const Text('Concluir')),
+        )
+      ],
     );
   }
 }
